@@ -1,0 +1,6 @@
+#VScode related stuff
+*.vscode
+
+#binery files
+bin/*
+!bin/.gitkeep 
