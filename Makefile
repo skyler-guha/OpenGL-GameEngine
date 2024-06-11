@@ -4,7 +4,8 @@ CXX = g++
 #Compiler Flags:
 # -g      - this flag adds debugging information to the executable file
 # -Wall  - this flag is used to turn on most compiler warnings
-CXXFLAGS = -g -Wall -Wextra
+# -fsanitize=leak - THis is to detect memory leaks
+CXXFLAGS = -g -Wall -Wextra #-fsanitize=leak -fno-omit-frame-pointer
 
 #Libraries to link:
 # -lSDL2		-SDL2 Library (for making our  window)
@@ -16,12 +17,12 @@ LDLIBS = -lSDL2 -lGL -lGLEW
 #For storing public header files
 INCLUDE = include/
 
-
+DEPENDENCIES = src/shaderClass.cpp src/vboClass.cpp src/eboClass.cpp src/vaoClass.cpp
 
 all:build run
 
 build: 
-	$(CXX) src/main.cpp src/shaderClass.cpp $(CXXFLAGS) $(LDLIBS) -I $(INCLUDE) -o bin/main.o
+	$(CXX) src/main.cpp $(DEPENDENCIES) $(CXXFLAGS) $(LDLIBS) -I $(INCLUDE) -o bin/main.o
 
 run:
 	./bin/main.o
