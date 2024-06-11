@@ -110,7 +110,7 @@ int main(){
     shader.Activate();
 
 
-    //======data config======
+    //======create vao, vbo, ebo vars======
     //create vao
     glGenVertexArrays(1, &VAO);
 
@@ -120,20 +120,43 @@ int main(){
     //creating a ebo
     glGenBuffers(1, &EBO);
 
-    //making our VAO active
-    glBindVertexArray(VAO);
+
+    //================vbo data config================
 
     //making our VBO active 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     
-    // Add data into the currently active VBO atribute
+    // Add data into the currently active VBO
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    
+
+    //making our VBO inactive 
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+
+
+    //============EBO data config===============================
+
     //making our EBO active 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     
+    // Add data into the currently active EBO buffer
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+    //making our EBO inactive 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+
+
+    //===============setting VAO attributes for VBO==============
+
+
+    //making our VAO active
+    glBindVertexArray(VAO);
+
+    //making our VBO active again so the VAO can use it
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    
     /* Position attribute */
     glVertexAttribPointer(      // tells currently selected VAO what to do with the supplied array data
         0,                      // attribute 0. No particular reason for 0, but must match the layout in the shader.
@@ -146,16 +169,37 @@ int main(){
 
     glEnableVertexAttribArray(0);// enable vertex attribute 0 for currently defined pointer
 
+    // return back to noral state
+    //glDisableVertexAttribArray(0); // tell OpenGL to not use vertex attribute arrays
+
+    
+    glBindVertexArray(0); //Unbind VAO
+    glBindBuffer(GL_ARRAY_BUFFER, 0); //Unbind VBO
+
+
+    //===============setting VAO attributes for EBO==============
+
+
+    //making our VAO active
+    glBindVertexArray(VAO);
+    
+    //making our VBO active again so the VAO can use it
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+    //making our EBO active again so the VAO can use it
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    
+
     /* Color attribute */
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1); // enable vertex attribute 1 for currently defined pointer
 
     // return back to noral state
-    //glDisableVertexAttribArray(0); // tell OpenGL to not use vertex attribute arrays
     //glDisableVertexAttribArray(1); // tell OpenGL to not use vertex attribute arrays
-    glBindBuffer(GL_ARRAY_BUFFER, 0); //Unbind VBO
     glBindVertexArray(0); //Unbind VAO
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); //Unbind EBO
+    glBindBuffer(GL_ARRAY_BUFFER, 0); //Unbind VBO
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); //Unbind EBO (don't unbind the EBO before unbinding your VAO)
+    
 
 
     //======main loop======
