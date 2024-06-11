@@ -2,9 +2,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <algorithm>
-#include <iterator>
 #include <GL/glew.h>
 
 
@@ -94,74 +91,4 @@ void Shader::Delete()
 }
 
 
-// class shaderClass{
-
-// public: 
-
-//     GLuint shaderProgramID;
-
-//     void useShaders(const char* vertexShaderPath, const char* fragmentShaderPath){
-
-//         int shader_compile_sucess;
-
-//         std::string vertexCode = get_file_contents(vertexShaderPath);
-//         static const char* vertexShaderSource =  vertexCode.c_str();
-
-//         std::string fragmentCode = get_file_contents(fragmentShaderPath);
-//         static const char* fragmentShaderSource =  fragmentCode.c_str();
-            
-//         //std::cout << vertexShaderSource << std::endl;
-
-//         //compile vertex shader
-//         GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-//         glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-//         glCompileShader(vertexShader);
-        
-        
-//         glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &shader_compile_sucess);
-//         if (!shader_compile_sucess) {
-//             printf("ERROR::SHADER::VERTEX::COMPILATION_FAILED\n");
-//         }
-
-//         // compile fragment shader
-//         GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-//         glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-//         glCompileShader(fragmentShader);
-
-//         glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &shader_compile_sucess);
-//         if (!shader_compile_sucess) {
-//             printf("ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n");
-//         }
-
-//         //create shader program object and get it's refrence (if one already exists, delete it first)
-//         if (shaderProgramID != 0){
-//             glDeleteProgram(shaderProgramID);
-//         }
-//         shaderProgramID = glCreateProgram();
-
-//         glAttachShader(shaderProgramID, vertexShader);
-//         glAttachShader(shaderProgramID, fragmentShader);
-
-
-//         // link shader program
-//         glLinkProgram(shaderProgramID);
-
-
-//         // tell opengl to start using the shaders
-//         glUseProgram(shaderProgramID);
-
-//         //delete the shader string refrences as they are no longer needed
-//         glDeleteShader(vertexShader);
-//         glDeleteShader(fragmentShader);
-
-        
-//     }
-
-//     void deleteShaders(){
-//         glDeleteProgram(shaderProgramID);
-//     }
-
-    
-
-// };
 
