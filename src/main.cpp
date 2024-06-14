@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include "shaderClass.h"
-//#include <GLFW/glfw3.h>
+#include "graphicObjectClass.h"
 
 
 
@@ -23,6 +23,8 @@ GLuint indices[] = {
 };
 
 
+
+
 int main(){
 
     //======defining usefull variables======
@@ -32,9 +34,6 @@ int main(){
     //SDL_GLContext sdl_context;
     SDL_Event sdl_event;
     //SDL_Surface* sdl_surface= nullptr;
-    GLuint VAO; //Vertex Array Object (To Store VBOs)
-    GLuint VBO; //Vertex Buffer Object
-    GLuint EBO; //Index/Element Buffer Object
     GLint success;
     bool main_loop= true;
 
@@ -109,108 +108,17 @@ int main(){
 
     shader.Activate();
 
+    // declare our object
 
-    //======create vao, vbo, ebo vars======
-    //create vao
-    glGenVertexArrays(1, &VAO);
-
-    //creating a vbo
-    glGenBuffers(1, &VBO);
-
-    //creating a ebo
-    glGenBuffers(1, &EBO);
-
-
-    //================vbo data config================
-
-    //making our VBO active 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    
-    // Add data into the currently active VBO
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    //making our VBO inactive 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
-
-    //============EBO data config===============================
-
-    //making our EBO active 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    
-    // Add data into the currently active EBO buffer
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-    //making our EBO inactive 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-
-
-
-    //===============setting VAO attributes for VBO==============
-
-
-    //making our VAO active
-    glBindVertexArray(VAO);
-
-    //making our VBO active again so the VAO can use it
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    
-    /* Position attribute */
-    glVertexAttribPointer(      // tells currently selected VAO what to do with the supplied array data
-        0,                      // attribute 0. No particular reason for 0, but must match the layout in the shader.
-        3,                      // size
-        GL_FLOAT,               // type
-        GL_FALSE,               // Tells opengl that the attributes are between 0-1
-        7 * sizeof(GLfloat),    // stride
-        (GLvoid*)0              // array buffer offset
-        );
-
-    glEnableVertexAttribArray(0);// enable vertex attribute 0 for currently defined pointer
-
-    // return back to noral state
-    //glDisableVertexAttribArray(0); // tell OpenGL to not use vertex attribute arrays
-
-    
-    glBindVertexArray(0); //Unbind VAO
-    glBindBuffer(GL_ARRAY_BUFFER, 0); //Unbind VBO
-
-
-    //===============setting VAO attributes for EBO==============
-
-
-    //making our VAO active
-    glBindVertexArray(VAO);
-    
-    //making our VBO active again so the VAO can use it
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
-    //making our EBO active again so the VAO can use it
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    
-
-    /* Color attribute */
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1); // enable vertex attribute 1 for currently defined pointer
-
-    // return back to noral state
-    //glDisableVertexAttribArray(1); // tell OpenGL to not use vertex attribute arrays
-    glBindVertexArray(0); //Unbind VAO
-    glBindBuffer(GL_ARRAY_BUFFER, 0); //Unbind VBO
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); //Unbind EBO (don't unbind the EBO before unbinding your VAO)
-    
-
-
-    //======main loop======
+    graphicObject obj1(vertices, sizeof(vertices), indices, sizeof(indices));
 
     
 
 	while(main_loop){
 
         // Setting attributes that only work inside the main loop
-        // glEnable (GL_BLEND);
-        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable (GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         //making note of the start time
         Uint64 start = SDL_GetPerformanceCounter();
@@ -231,21 +139,10 @@ int main(){
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT); 
 
-        //making our VBO active 
-        glBindVertexArray(VAO);
         
-        // Draw the triangle directly using buffers
-        //glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-        
-        //draw our tringle using elements
-        glDrawElements(
-            GL_TRIANGLES,                           //premetive
-            sizeof(indices)/sizeof(indices[0]),     //count of indices
-            GL_UNSIGNED_INT,                        // datatype of our values
-            0                                       //index of our indices
-        );
 
-        glBindVertexArray(0);
+        //draw shape
+        obj1.drawObject();
 
         
 
@@ -262,9 +159,7 @@ int main(){
 	}
 
 	// clean up
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
+    obj1.deleteObject();
     shader.Delete();
 	SDL_DestroyWindow(sdl_window);
 	SDL_Quit();

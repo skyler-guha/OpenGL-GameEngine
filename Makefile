@@ -17,7 +17,7 @@ LDLIBS = -lSDL2 -lGL -lGLEW
 #For storing public header files
 INCLUDE = include/
 
-DEPENDENCIES = src/shaderClass.cpp src/vboClass.cpp src/eboClass.cpp src/vaoClass.cpp
+DEPENDENCIES = src/shaderClass.cpp src/vboClass.cpp src/eboClass.cpp src/vaoClass.cpp src/graphicObjectClass.cpp
 
 all:build run
 
