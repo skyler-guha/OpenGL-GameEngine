@@ -35,6 +35,8 @@ clean:
 # Install GLEW: sudo apt-get install libglew-dev
 # installs- libglew2.2 libglu1-mesa-dev libopengl-dev libglew-dev 
 
+# Install GLM for vector math: sudo apt install libglm-dev
+
 # For dinamic linking to opengl: -lGL
 
 #Undefined references to gl functions probably mean you did not link libGL (-lGL). 
