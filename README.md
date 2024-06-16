@@ -1,6 +1,6 @@
-# OpenGL-GameEngine
+# OpenGL-GraphicsEngine
 
-This is a generic OpenGL based game engine that I have written as a learning exercise.
+This is a generic OpenGL based graphics engine that I have written as a learning exercise.
 
 The aim here was to learn C++, OpenGL, and Graphics Programming.
 
