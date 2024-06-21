@@ -1,5 +1,7 @@
 # OpenGL-GraphicsEngine
 
+![demo gif](resources/gifs/demo.gif)
+
 This is a generic OpenGL based graphics engine that I have written as a learning exercise.
 
 The aim here was to learn C++, OpenGL, and Graphics Programming.
@@ -8,7 +10,11 @@ This is an ongoing project.
 
 It is meant for learning only and not for production use.
 
-# References/Resources used:
+## List of things to add that are pending:
+1) Class for loading objects.
+2) Adding support for lighting.
+
+## References/Resources used:
 
 - [OpenGL Tutorials (Playlist)](https://youtube.com/playlist?list=PLPaoO-vpZnumdcb4tZc4x5Q-v7CkrQ6M-&si=LtQJQgJQTIUyv1tj)
 - [Modern OpenGL Guide (PDF book)](https://raw.githubusercontent.com/Overv/Open.GL/master/ebook/Modern%20OpenGL%20Guide.pdf)
