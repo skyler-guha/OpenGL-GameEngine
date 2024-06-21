@@ -27,15 +27,20 @@ Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath)
     //check variable
     int shader_compile_sucess;
 
+	
+
 	// Read vertexFile and fragmentFile and store the strings
 	std::string vertexCode = get_file_contents(vertexShaderPath);
+	
 	std::string fragmentCode = get_file_contents(fragmentShaderPath);
+
+	
 
 	// Convert the shader source strings into character arrays
 	const char* vertexSource = vertexCode.c_str();
 	const char* fragmentSource = fragmentCode.c_str();
 
-
+	
 
 	// Create Vertex Shader Object and get its reference
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);

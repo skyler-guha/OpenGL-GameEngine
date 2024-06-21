@@ -13,7 +13,7 @@ class Shader{
 
 public:
 	// Reference ID of the Shader Program
-	GLuint shaderProgramID;
+	GLint shaderProgramID;
 	
 	// Constructor that build the Shader Program from 2 different shaders
 	Shader(const char* vertexFile, const char* fragmentFile);

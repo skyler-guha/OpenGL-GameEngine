@@ -5,7 +5,7 @@ CXX = g++
 # -g      - this flag adds debugging information to the executable file
 # -Wall  - this flag is used to turn on most compiler warnings
 # -fsanitize=leak - THis is to detect memory leaks
-CXXFLAGS = -g -Wall -Wextra #-fsanitize=leak -fno-omit-frame-pointer
+CXXFLAGS = -g -Wall -Wextra # -fsanitize=leak -fno-omit-frame-pointer
 
 #Libraries to link:
 # -lSDL2		-SDL2 Library (for making our  window)
@@ -17,7 +17,7 @@ LDLIBS = -lSDL2 -lGL -lGLEW
 #For storing public header files
 INCLUDE = include/
 
-DEPENDENCIES = src/shaderClass.cpp src/vboClass.cpp src/eboClass.cpp src/vaoClass.cpp src/graphicObjectClass.cpp
+DEPENDENCIES = src/shaderClass.cpp src/vboClass.cpp src/eboClass.cpp src/vaoClass.cpp src/texture.cpp
 
 all:build run
 
@@ -36,6 +36,8 @@ clean:
 # installs- libglew2.2 libglu1-mesa-dev libopengl-dev libglew-dev 
 
 # Install GLM for vector math: sudo apt install libglm-dev
+
+# Install STB lib for reading textures: sudo apt install libstb-dev
 
 # For dinamic linking to opengl: -lGL
 

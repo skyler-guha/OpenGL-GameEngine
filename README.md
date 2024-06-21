@@ -21,3 +21,4 @@ It is meant for learning only and not for production use.
 - [I made my own game engine again (video)](https://youtu.be/XfKFZ46mDXI?si=TqsBXJ29_xbZ_p34)
 - [SDL framerate timing](https://thenumb.at/cpp-course/sdl2/08/08.html)
 - [Drawing and swaping explained](https://stackoverflow.com/a/34650710)
+- [Advice on input handling](https://www.reddit.com/r/sdl/comments/11u7nfl/comment/jd52xur/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button)
